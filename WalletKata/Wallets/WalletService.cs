@@ -6,6 +6,13 @@ namespace WalletKata.Wallets
 {
     public class WalletService
     {
+        private readonly WalletDAO walletDao;
+
+        public WalletService(WalletDAO walletDao)
+        {
+            this.walletDao = walletDao;
+        }
+
         public List<Wallet> GetWalletsByUser(User user)
         {
             List<Wallet> walletList = new List<Wallet>();
@@ -25,7 +32,7 @@ namespace WalletKata.Wallets
 
                 if (isFriend)
                 {
-                    walletList = WalletDAO.FindWalletsByUser(user);
+                    walletList = this.walletDao.FindWalletsByUser(user);
                 }
 
                 return walletList;
