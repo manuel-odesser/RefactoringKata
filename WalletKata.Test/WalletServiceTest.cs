@@ -59,6 +59,26 @@ namespace WalletKata.Test
         }
 
         [Test]
+        public void GetWalletsByUser_userIsLoggedAndHasARandomFriend_returnsEmptyList()
+        {
+            // Arrange
+            User loggedInUser = new User();
+            userSessionMock.Setup(m => m.GetLoggedUser()).Returns(loggedInUser);
+
+            var userSession = this.userSessionMock.Object;
+            userSessionRepositoryMock.Setup(m => m.Current).Returns(userSession);
+
+            var user = new User();
+            user.AddFriend(new User());
+
+            // Act
+            var actual = this.sut.GetWalletsByUser(user);
+
+            // Assert
+            Assert.That(actual, Is.Empty);
+        }
+
+        [Test]
         public void GetWalletsByUser_userIsLoggedAndHasALoggedInFriend_returnsListWithOneWallet()
         {
             // Arrange
