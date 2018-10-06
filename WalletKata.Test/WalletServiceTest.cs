@@ -59,7 +59,7 @@ namespace WalletKata.Test
         }
 
         [Test]
-        public void GetWalletsByUser_userIsLoggedAndHasAFriend_returnsListFromDao()
+        public void GetWalletsByUser_userIsLoggedAndHasALoggedInFriend_returnsListWithOneWallet()
         {
             // Arrange
             User loggedInUser = new User();
@@ -71,14 +71,17 @@ namespace WalletKata.Test
             var user = new User();
             user.AddFriend(loggedInUser);
 
-            var expectedWallets = new List<Wallet>();
-            this.walletDaoMock.Setup(m => m.FindWalletsByUser(user)).Returns(expectedWallets);
+            var walletsFromDao = new List<Wallet>();
+            this.walletDaoMock.Setup(m => m.FindWalletsByUser(user)).Returns(walletsFromDao);
+
+            var wallet = new Wallet();
+            walletsFromDao.Add(wallet);
 
             // Act
             var actual = this.sut.GetWalletsByUser(user);
 
             // Assert
-            Assert.That(actual, Is.SameAs(expectedWallets));
+            Assert.That(actual, Has.Exactly(1).SameAs(wallet));
         }
     }
 }

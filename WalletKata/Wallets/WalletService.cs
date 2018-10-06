@@ -35,7 +35,7 @@ namespace WalletKata.Wallets
 
                 if (isFriend)
                 {
-                    walletList = this.walletDao.FindWalletsByUser(user);
+                    walletList.AddRange(this.walletDao.FindWalletsByUser(user));
                 }
 
                 return walletList;
