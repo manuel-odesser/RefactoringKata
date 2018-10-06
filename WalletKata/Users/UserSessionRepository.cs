@@ -4,7 +4,7 @@ namespace WalletKata.Users
 {
     public class UserSessionRepository
     {
-        public UserSession Current
+        public virtual UserSession Current
         {
             get
             {
