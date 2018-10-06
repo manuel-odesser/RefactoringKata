@@ -17,17 +17,11 @@ namespace WalletKata.Wallets
 
         public List<Wallet> GetWalletsByUser(User user)
         {
-            UserSession userSession = this.userSessionRepository.Current;
-            User loggedUser = userSession.GetLoggedUser();
-
-            if (loggedUser == null)
-            {
-                throw new UserNotLoggedInException();
-            }
+            User loggedInUser = GetLoggedInUserOrThrow();
 
             List<Wallet> walletList = new List<Wallet>();
 
-            if (AreFriends(user, loggedUser))
+            if (AreFriends(user, loggedInUser))
             {
                 walletList.AddRange(this.walletDao.FindWalletsByUser(user));
             }
@@ -35,11 +29,24 @@ namespace WalletKata.Wallets
             return walletList;
         }
 
-        private static bool AreFriends(User user, User loggedUser)
+        private User GetLoggedInUserOrThrow()
+        {
+            UserSession userSession = this.userSessionRepository.Current;
+            User loggedInUser = userSession.GetLoggedUser();
+
+            if (loggedInUser == null)
+            {
+                throw new UserNotLoggedInException();
+            }
+
+            return loggedInUser;
+        }
+
+        private static bool AreFriends(User user, User loggedInUser)
         {
             foreach (User friend in user.GetFriends())
             {
-                if (friend.Equals(loggedUser))
+                if (friend.Equals(loggedInUser))
                 {
                     return true;
                 }
