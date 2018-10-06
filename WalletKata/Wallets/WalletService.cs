@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using WalletKata.Users;
 using WalletKata.Exceptions;
+using WalletKata.Users;
 
 namespace WalletKata.Wallets
 {
@@ -33,7 +33,7 @@ namespace WalletKata.Wallets
             else
             {
                 throw new UserNotLoggedInException();
-            }      
-        }         
+            }
+        }
     }
 }

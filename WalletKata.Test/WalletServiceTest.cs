@@ -7,7 +7,7 @@ namespace WalletKata.Test
         [Test]
         public void TestSomething()
         {
-            
+
         }
     }
 }
