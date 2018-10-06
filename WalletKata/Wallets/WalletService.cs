@@ -19,7 +19,6 @@ namespace WalletKata.Wallets
         {
             UserSession userSession = this.userSessionRepository.Current;
             User loggedUser = userSession.GetLoggedUser();
-            bool isFriend = false;
 
             if (loggedUser == null)
             {
@@ -27,6 +26,19 @@ namespace WalletKata.Wallets
             }
 
             List<Wallet> walletList = new List<Wallet>();
+            bool isFriend = AreFriends(user, loggedUser);
+
+            if (isFriend)
+            {
+                walletList.AddRange(this.walletDao.FindWalletsByUser(user));
+            }
+
+            return walletList;
+        }
+
+        private static bool AreFriends(User user, User loggedUser)
+        {
+            bool isFriend = false;
             foreach (User friend in user.GetFriends())
             {
                 if (friend.Equals(loggedUser))
@@ -36,12 +48,7 @@ namespace WalletKata.Wallets
                 }
             }
 
-            if (isFriend)
-            {
-                walletList.AddRange(this.walletDao.FindWalletsByUser(user));
-            }
-
-            return walletList;
+            return isFriend;
         }
     }
 }
