@@ -26,9 +26,8 @@ namespace WalletKata.Wallets
             }
 
             List<Wallet> walletList = new List<Wallet>();
-            bool isFriend = AreFriends(user, loggedUser);
 
-            if (isFriend)
+            if (AreFriends(user, loggedUser))
             {
                 walletList.AddRange(this.walletDao.FindWalletsByUser(user));
             }
@@ -38,17 +37,15 @@ namespace WalletKata.Wallets
 
         private static bool AreFriends(User user, User loggedUser)
         {
-            bool isFriend = false;
             foreach (User friend in user.GetFriends())
             {
                 if (friend.Equals(loggedUser))
                 {
-                    isFriend = true;
-                    break;
+                    return true;
                 }
             }
 
-            return isFriend;
+            return false;
         }
     }
 }
