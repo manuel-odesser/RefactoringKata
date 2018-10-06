@@ -32,7 +32,7 @@ namespace WalletKata.Wallets
         private User GetLoggedInUserOrThrow()
         {
             UserSession userSession = this.userSessionRepository.Current;
-            User loggedInUser = userSession.GetLoggedUser();
+            User loggedInUser = userSession.GetLoggedInUser();
 
             if (loggedInUser == null)
             {

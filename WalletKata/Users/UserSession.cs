@@ -6,9 +6,9 @@ namespace WalletKata.Users
     {
         public UserSession() { }
 
-        public virtual User GetLoggedUser()
+        public virtual User GetLoggedInUser()
         {
-            throw new ThisIsAStubException("UserSession.IsUserLoggedIn() should not be called in an unit test");
+            throw new ThisIsAStubException("UserSession.GetLoggedInUser() should not be called in an unit test");
         }
     }
 }

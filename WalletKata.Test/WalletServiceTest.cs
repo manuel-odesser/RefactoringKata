@@ -27,7 +27,7 @@ namespace WalletKata.Test
         public void GetWalletsByUser_userIsNotLogged_throws()
         {
             // Arrange
-            userSessionMock.Setup(m => m.GetLoggedUser()).Returns((User)null);
+            userSessionMock.Setup(m => m.GetLoggedInUser()).Returns((User)null);
 
             var userSession = this.userSessionMock.Object;
             userSessionRepositoryMock.Setup(m => m.Current).Returns(userSession);
@@ -45,7 +45,7 @@ namespace WalletKata.Test
         {
             // Arrange
             User loggedInUser = new User();
-            userSessionMock.Setup(m => m.GetLoggedUser()).Returns(loggedInUser);
+            userSessionMock.Setup(m => m.GetLoggedInUser()).Returns(loggedInUser);
 
             var userSession = this.userSessionMock.Object;
             userSessionRepositoryMock.Setup(m => m.Current).Returns(userSession);
@@ -63,7 +63,7 @@ namespace WalletKata.Test
         {
             // Arrange
             User loggedInUser = new User();
-            userSessionMock.Setup(m => m.GetLoggedUser()).Returns(loggedInUser);
+            userSessionMock.Setup(m => m.GetLoggedInUser()).Returns(loggedInUser);
 
             var userSession = this.userSessionMock.Object;
             userSessionRepositoryMock.Setup(m => m.Current).Returns(userSession);
@@ -83,7 +83,7 @@ namespace WalletKata.Test
         {
             // Arrange
             User loggedInUser = new User();
-            userSessionMock.Setup(m => m.GetLoggedUser()).Returns(loggedInUser);
+            userSessionMock.Setup(m => m.GetLoggedInUser()).Returns(loggedInUser);
 
             var userSession = this.userSessionMock.Object;
             userSessionRepositoryMock.Setup(m => m.Current).Returns(userSession);
